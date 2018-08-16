@@ -4,11 +4,11 @@ import (
 	"database/sql/driver"
 	"strings"
 
-	"github.com/qor/admin"
-	"github.com/qor/qor"
-	"github.com/qor/qor/resource"
-	"github.com/qor/qor/utils"
-	"github.com/qor/validations"
+	"github.com/aghape/admin"
+	"github.com/aghape/aghape"
+	"github.com/aghape/aghape/resource"
+	"github.com/aghape/aghape/utils"
+	"github.com/aghape/validations"
 )
 
 // Slug is a scanner, could be used as field type, then this field could be used as slug field
@@ -38,7 +38,6 @@ func (Slug) ConfigureQorMeta(meta resource.Metaor) {
 	if meta, ok := meta.(*admin.Meta); ok {
 		res := meta.GetBaseResource().(*admin.Resource)
 
-		res.GetAdmin().RegisterViewPath("github.com/qor/slug/views")
 		res.UseTheme("slug")
 
 		name := strings.TrimSuffix(meta.Name, "WithSlug")
@@ -53,13 +52,13 @@ func (Slug) ConfigureQorMeta(meta resource.Metaor) {
 			if meta := metaValues.Get(fieldName); meta != nil {
 				slug := utils.ToString(metaValues.Get(fieldName).Value)
 				if slug == "" {
-					return validations.NewError(record, fieldName, name+"'s slug can't be blank")
+					return validations.Failed(record, fieldName, name+"'s slug can't be blank")
 				} else if strings.Contains(slug, " ") {
-					return validations.NewError(record, fieldName, name+"'s slug can't contains blank string")
+					return validations.Failed(record, fieldName, name+"'s slug can't contains blank string")
 				}
 			} else {
 				if field, ok := context.GetDB().NewScope(record).FieldByName(fieldName); ok && field.IsBlank {
-					return validations.NewError(record, fieldName, name+"'s slug can't be blank")
+					return validations.Failed(record, fieldName, name+"'s slug can't be blank")
 				}
 			}
 			return nil
