@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/aghape/admin"
-	"github.com/aghape/aghape"
-	"github.com/aghape/aghape/resource"
-	"github.com/aghape/aghape/utils"
+	"github.com/aghape/core"
+	"github.com/aghape/core/resource"
+	"github.com/aghape/core/utils"
 	"github.com/aghape/validations"
 )
 
@@ -48,7 +48,7 @@ func (Slug) ConfigureQorMeta(meta resource.Metaor) {
 		}
 
 		var fieldName = meta.Name
-		res.AddValidator(func(record interface{}, metaValues *resource.MetaValues, context *qor.Context) error {
+		res.AddValidator(func(record interface{}, metaValues *resource.MetaValues, context *core.Context) error {
 			if meta := metaValues.Get(fieldName); meta != nil {
 				slug := utils.ToString(metaValues.Get(fieldName).Value)
 				if slug == "" {
