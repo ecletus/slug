@@ -2,7 +2,7 @@
 
 Slug package is an extension for qor. It provides an easy way to create a pretty URL for your model.
 
-[![GoDoc](https://godoc.org/github.com/aghape/slug?status.svg)](https://godoc.org/github.com/aghape/slug)
+[![GoDoc](https://godoc.org/github.com/ecletus/slug?status.svg)](https://godoc.org/github.com/ecletus/slug)
 
 ## Documentation
 
